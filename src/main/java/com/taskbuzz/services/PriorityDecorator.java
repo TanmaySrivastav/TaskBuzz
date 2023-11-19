@@ -1,9 +1,11 @@
-package com.taskbuzz.entities;
+package com.taskbuzz.services;
+
+import com.taskbuzz.entities.Priority;
 
 public class PriorityDecorator extends PriorityImpl{
 
 	
-	PriorityImpl prioritylevel;
+	private PriorityImpl prioritylevel;
 	
 	public PriorityDecorator(PriorityImpl priorityLevel) {
 		this.prioritylevel = priorityLevel;

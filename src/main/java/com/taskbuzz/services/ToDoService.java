@@ -7,11 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.taskbuzz.entities.AnyPriorityDecorator;
 import com.taskbuzz.entities.CategoryFactory;
-import com.taskbuzz.entities.HighPriorityImpl;
-import com.taskbuzz.entities.LowPriorityImpl;
-import com.taskbuzz.entities.MediumPriorityImpl;
 import com.taskbuzz.entities.Priority;
 import com.taskbuzz.entities.Todo;
 import com.taskbuzz.entities.User;
