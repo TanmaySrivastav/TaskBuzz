@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.taskbuzz.entities.CategoryFactory;
+import com.taskbuzz.entities.Priority;
 import com.taskbuzz.entities.Todo;
 import com.taskbuzz.entities.User;
 import com.taskbuzz.mediator.ServiceMediator;
@@ -72,16 +73,30 @@ public class ToDoService {
 			if (updatetodorequest.getDueDate() != null && updatetodorequest.getTask() != null
 					&& updatetodorequest.getPriority() != null) {
 				todo.setDueDate(updatetodorequest.getDueDate());
-				todo.setTask(updatetodorequest.getTask());
-				todo.setPriority(updatetodorequest.getPriority());
+				todo.setTask(updatetodorequest.getTask());				
+				todo.setPriority(getPriorityFromDecorators(updatetodorequest.getPriority()));
 			} else if (updatetodorequest.getDueDate() != null) {
 				todo.setDueDate(updatetodorequest.getDueDate());
 			} else if (updatetodorequest.getTask() != null) {
 				todo.setTask(updatetodorequest.getTask());
 			} else if (updatetodorequest.getPriority() != null) {
-				todo.setPriority(updatetodorequest.getPriority());
+				todo.setPriority(getPriorityFromDecorators(updatetodorequest.getPriority()));
 			}
 			todoRepository.save(todo);
+		}
+	}
+
+	public Priority getPriorityFromDecorators(Priority priority) {
+
+		switch (priority.getPriorityLevel()) {
+		case 1:
+			return new AnyPriorityDecorator(new HighPriorityImpl()).getPriority();
+		case 2:
+			return new AnyPriorityDecorator(new MediumPriorityImpl()).getPriority();
+		case 3:
+			return new AnyPriorityDecorator(new LowPriorityImpl()).getPriority();
+		default:
+			return null;
 		}
 	}
 }
