@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.taskbuzz.entities.User;
+import com.taskbuzz.request.AddUserRequest;
 import com.taskbuzz.services.UserService;
-import com.taskbuzz.todoapp.request.AddUserRequest;
+
 
 
 
@@ -24,17 +25,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
-	@GetMapping("/allusers")
-	public List<User> getUser() {
-
-		return userService.getUsers();
-	}
-
-	@GetMapping("/current-user")
-	public String getLoggedInUser(Principal principal) {
-		return principal.getName();
-	}
 
 	@PostMapping("/create-user")
 	public User createUser(@RequestBody User user) {
@@ -47,10 +37,5 @@ public class UserController {
 		return userService.getUserById(userId);
 	}
 
-	@PostMapping
-	public User addUser(@RequestBody AddUserRequest userRequest) {
-
-		return userService.addUser(userRequest);
-	}
 
 }

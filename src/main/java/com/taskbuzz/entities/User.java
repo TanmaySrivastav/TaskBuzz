@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -36,8 +37,11 @@ public class User implements UserDetails{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
+	@Column(name = "username")
 	private String name;
+	@Column(nullable = false, unique = true)
 	private String emailId;
+	@Column(name = "password")
 	private String password;
 
 	@Enumerated(EnumType.STRING)

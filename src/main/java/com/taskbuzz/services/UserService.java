@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.taskbuzz.entities.User;
 import com.taskbuzz.repository.UserRepository;
-import com.taskbuzz.todoapp.request.AddUserRequest;
+import com.taskbuzz.request.AddUserRequest;
+
 
 
 

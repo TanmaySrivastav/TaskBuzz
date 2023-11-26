@@ -14,8 +14,9 @@ import com.taskbuzz.mediator.ServiceMediator;
 import com.taskbuzz.mediator.ServiceMediatorImpl;
 import com.taskbuzz.repository.TodoRepository;
 import com.taskbuzz.repository.UserRepository;
-import com.taskbuzz.todoapp.request.AddToDoRequest;
-import com.taskbuzz.todoapp.request.UpdateToDoRequest;
+import com.taskbuzz.request.AddToDoRequest;
+import com.taskbuzz.request.UpdateToDoRequest;
+
 
 
 
