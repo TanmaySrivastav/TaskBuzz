@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.taskbuzz.entities.Todo;
 import com.taskbuzz.entities.User;
+import com.taskbuzz.request.AddToDoRequest;
+import com.taskbuzz.request.UpdateToDoRequest;
 import com.taskbuzz.services.ToDoService;
 import com.taskbuzz.services.UserService;
-import com.taskbuzz.todoapp.request.AddToDoRequest;
-import com.taskbuzz.todoapp.request.UpdateToDoRequest;
+
 
 
 
