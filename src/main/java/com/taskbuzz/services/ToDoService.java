@@ -73,52 +73,30 @@ public class ToDoService {
 			if (updatetodorequest.getDueDate() != null && updatetodorequest.getTask() != null
 					&& updatetodorequest.getPriority() != null) {
 				todo.setDueDate(updatetodorequest.getDueDate());
-				todo.setTask(updatetodorequest.getTask());
-				
-				Priority decoratedPriority = getPriorityFromDecorators(todo, updatetodorequest.getPriority());
-				setPriorityWithCommand(todo, decoratedPriority);
+				todo.setTask(updatetodorequest.getTask());				
+				todo.setPriority(getPriorityFromDecorators(updatetodorequest.getPriority()));
 			} else if (updatetodorequest.getDueDate() != null) {
 				todo.setDueDate(updatetodorequest.getDueDate());
 			} else if (updatetodorequest.getTask() != null) {
 				todo.setTask(updatetodorequest.getTask());
 			} else if (updatetodorequest.getPriority() != null) {
-				Priority decoratedPriority = getPriorityFromDecorators(todo, updatetodorequest.getPriority());
-				setPriorityWithCommand(todo, decoratedPriority);
+				todo.setPriority(getPriorityFromDecorators(updatetodorequest.getPriority()));
 			}
 			todoRepository.save(todo);
 		}
 	}
 
-	public Priority getPriorityFromDecorators(Todo todo, Priority priority) {
-		switch (priority.getPriorityLevel()) {
-		case 1:
-			return new WithHighPriority(todo).getPriority();
-		case 2:
-			return new WithMediumPriority(todo).getPriority();
-		case 3:
-			return new WithLowPriority(todo).getPriority();
-		default:
-			return new WithLowPriority(todo).getPriority();
-		}
-	}
-	
-	public void setPriorityWithCommand(Todo todo, Priority priority) {
-		CommandInvoker invoker = new CommandInvoker();
-		SetHighPriorityToTodoCommand highPriorityToTodoCommand = new SetHighPriorityToTodoCommand(todo);
-		SetMediumPriorityToTodoCommand mediumPriorityToTodoCommand = new SetMediumPriorityToTodoCommand(todo);
-		SetLowPriorityToTodoCommand lowPriorityToTodoCommand = new SetLowPriorityToTodoCommand(todo);
+	public Priority getPriorityFromDecorators(Priority priority) {
 
 		switch (priority.getPriorityLevel()) {
 		case 1:
-			invoker.setCommand(highPriorityToTodoCommand);
-			break;
+			return new AnyPriorityDecorator(new HighPriorityImpl()).getPriority();
 		case 2:
-			invoker.setCommand(mediumPriorityToTodoCommand);
-			break;
+			return new AnyPriorityDecorator(new MediumPriorityImpl()).getPriority();
 		case 3:
+			return new AnyPriorityDecorator(new LowPriorityImpl()).getPriority();
 		default:
-			invoker.setCommand(lowPriorityToTodoCommand);
+			return null;
 		}
-		invoker.invokeCommand();
 	}
 }

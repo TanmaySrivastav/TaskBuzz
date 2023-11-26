@@ -2,16 +2,11 @@ package com.taskbuzz.services;
 
 import com.taskbuzz.entities.Priority;
 
-public class WithLowPriority extends PriorityDecorator{
-
-	public WithLowPriority(PriorityImpl priorityLevel) {
-		super(priorityLevel);
-	}
+public class LowPriorityImpl extends PriorityImpl{
 
 	@Override
 	public Priority getPriority() {
 		return Priority.LOW;
 	}
-	
-}
 
+}
