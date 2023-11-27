@@ -1,10 +1,18 @@
 package com.taskbuzz.entities;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public enum Priority {
- LOW,
- HIGH,
- MEDIUM
+	LOW(3),
+	HIGH(1),
+	MEDIUM(2);
+	
+	private int priorityLevel;
+	
+	Priority(int priorityLevel) {
+		this.priorityLevel = priorityLevel;
+	}
+	
+	public int getPriorityLevel() {
+		return priorityLevel;
+	}
+
 }

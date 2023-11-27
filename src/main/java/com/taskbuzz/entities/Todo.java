@@ -2,6 +2,8 @@ package com.taskbuzz.entities;
 
 import java.sql.Date;
 
+import com.taskbuzz.services.PriorityImpl;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -12,7 +14,7 @@ import jakarta.persistence.Id;
 
 @Entity
 
-public class Todo {
+public class Todo extends PriorityImpl{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long todoId;

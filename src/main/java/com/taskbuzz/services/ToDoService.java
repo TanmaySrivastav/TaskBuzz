@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
+import com.taskbuzz.entities.Priority;
 import com.taskbuzz.entities.Todo;
 import com.taskbuzz.entities.User;
 import com.taskbuzz.mediator.ServiceMediator;
@@ -75,15 +75,58 @@ public class ToDoService {
 					&& updatetodorequest.getPriority() != null) {
 				todo.setDueDate(updatetodorequest.getDueDate());
 				todo.setTask(updatetodorequest.getTask());
-				todo.setPriority(updatetodorequest.getPriority());
+				
+				//setting the Priority with Decorator and Command
+				Priority newPriority = getPriorityFromDecorators(todo, updatetodorequest.getPriority());
+				setPriorityWithCommand(todo, newPriority);
 			} else if (updatetodorequest.getDueDate() != null) {
 				todo.setDueDate(updatetodorequest.getDueDate());
 			} else if (updatetodorequest.getTask() != null) {
 				todo.setTask(updatetodorequest.getTask());
 			} else if (updatetodorequest.getPriority() != null) {
-				todo.setPriority(updatetodorequest.getPriority());
+				//setting the Priority with Decorator and Command
+				Priority newPriority = getPriorityFromDecorators(todo, updatetodorequest.getPriority());
+				setPriorityWithCommand(todo, newPriority);
 			}
 			todoRepository.save(todo);
 		}
+	}
+	
+	// Get Priority Object from Decorator
+	public Priority getPriorityFromDecorators(Todo todo, Priority priority) {
+		switch (priority.getPriorityLevel()) {
+		case 1: // Todo Object is Decorated with a High Priority
+			return new WithHighPriority(todo).getPriority();
+		case 2: // Todo Object is Decorated with a Medium Priority
+			return new WithMediumPriority(todo).getPriority();
+		case 3: // Todo Object is Decorated with a Low Priority
+			return new WithLowPriority(todo).getPriority();
+		default: // Todo Object is Decorated with a Low Priority By Default
+			return new WithLowPriority(todo).getPriority();
+		}
+	}
+
+	// Set Priority to Task with Command Pattern
+	public void setPriorityWithCommand(Todo todo, Priority priority) {
+		CommandInvoker invoker = new CommandInvoker();
+		// Concrete Command Object Instance is created using Receiver - Todo Object
+		SetHighPriorityToTodoCommand highPriorityToTodoCommand = new SetHighPriorityToTodoCommand(todo);
+		SetMediumPriorityToTodoCommand mediumPriorityToTodoCommand = new SetMediumPriorityToTodoCommand(todo);
+		SetLowPriorityToTodoCommand lowPriorityToTodoCommand = new SetLowPriorityToTodoCommand(todo);
+
+		// Type of Command is set with CommandInvoker
+		switch (priority.getPriorityLevel()) {
+		case 1:
+			invoker.setCommand(highPriorityToTodoCommand);
+			break;
+		case 2:
+			invoker.setCommand(mediumPriorityToTodoCommand);
+			break;
+		case 3:
+		default:
+			invoker.setCommand(lowPriorityToTodoCommand);
+		}
+		// Command is invoked to set the priority to Todo
+		invoker.invokeCommand();
 	}
 }
