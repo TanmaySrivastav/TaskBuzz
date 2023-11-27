@@ -15,7 +15,9 @@ import com.taskbuzz.entities.User;
 import com.taskbuzz.request.AddToDoRequest;
 import com.taskbuzz.request.UpdateToDoRequest;
 import com.taskbuzz.services.ToDoService;
+import com.taskbuzz.services.UpdateTodoCommand;
 import com.taskbuzz.services.UserService;
+import com.taskbuzz.services.Command;
 
 
 
@@ -58,4 +60,10 @@ public class ToDoController {
 	public void deleteTodo(@PathVariable Long userId, @PathVariable Long todoId) {
 		todoservice.deleteToDo(userId, todoId);
 	}
+	
+	@PutMapping("/update-todo/{todoId}")
+    public void updateTodoFromCommandLine(@PathVariable Long todoId) {
+        Command updateCommand = new UpdateTodoCommand(todoId, todoservice);
+        updateCommand.execute();
+    }
 }
