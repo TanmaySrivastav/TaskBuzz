@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.taskbuzz.entities.CategoryFactory;
+
 import com.taskbuzz.entities.Todo;
 import com.taskbuzz.entities.User;
 import com.taskbuzz.mediator.ServiceMediator;
@@ -59,12 +59,13 @@ public class ToDoService {
 		return todoRepository.save(todo);
 	}
 
-	public void deleteToDo(@PathVariable Long userId, @PathVariable Long todoId) {
+	public User deleteToDo(@PathVariable Long userId, @PathVariable Long todoId) {
 		ServiceMediator serviceMediator = new ServiceMediatorImpl(userService);
 		User user = serviceMediator.getUser(userId);
 		Todo todo = getToDoById(todoId);
 		user.getTodoList().remove(todo);
 		todoRepository.delete(todo);
+		return user;
 	}
 
 	public void updateToDoById(Long todoId, UpdateToDoRequest updatetodorequest) {

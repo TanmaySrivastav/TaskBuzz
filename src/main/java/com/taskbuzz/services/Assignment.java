@@ -1,4 +1,4 @@
-package com.taskbuzz.entities;
+package com.taskbuzz.services;
 
 public class Assignment implements Category {
 
