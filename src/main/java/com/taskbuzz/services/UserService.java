@@ -25,6 +25,9 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+    	public UserService(UserRepository userRepositoryMock, PasswordEncoder passwordEncoderMock) {
+	}
+
 	public List<User> getUsers() {
 		return userRepository.findAll();
 	}

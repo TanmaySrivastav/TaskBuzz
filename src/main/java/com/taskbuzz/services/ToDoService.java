@@ -34,6 +34,11 @@ public class ToDoService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+	public ToDoService(UserRepository userRepository2, TodoRepository todoRepository2, UserService userService2) {
+
+	}
+
+
 	public Todo getToDoById(Long todoId) {
 		return todoRepository.findById(todoId).orElseThrow(() -> new NoSuchElementException());
 	}
