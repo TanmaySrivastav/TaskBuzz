@@ -1,20 +1,22 @@
 package com.taskbuzz.services;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 public class CategoryFactory {
 
-	public String getCategoryType(String categoryType)
-	{
-		switch(categoryType.toLowerCase())
-		{
-		case "grocery": return new Grocery().getCategory(categoryType);
-		
-		case "assignment": return new Assignment().getCategory(categoryType);
-		
-		case "fitness": return new Fitness().getCategory(categoryType);
-		
-		default: return new Others().getCategory(categoryType);
-		
-		}
-			
+	private final Map<String, Function<String, String>> categoryMap = new HashMap<>();
+
+	public CategoryFactory() {
+		categoryMap.put("grocery", new Grocery()::getCategory);
+		categoryMap.put("assignment", new Assignment()::getCategory);
+		categoryMap.put("fitness", new Fitness()::getCategory);
+		categoryMap.put("default", new Others()::getCategory);
 	}
+
+	public String getCategoryType(String categoryType) {
+		return categoryMap.getOrDefault(categoryType.toLowerCase(), categoryMap.get("default")).apply(categoryType);
+	}
+
 }
