@@ -25,7 +25,7 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-    	public UserService(UserRepository userRepositoryMock, PasswordEncoder passwordEncoderMock) {
+	public UserService() {
 	}
 
 	public List<User> getUsers() {
@@ -47,8 +47,7 @@ public class UserService {
 	public User addUser(AddUserRequest userRequest) {
 		
 		User user = new User();
-		user.setname(userRequest.getUsername());
-		
+		user.setname(userRequest.getUsername());	
 		user.setEmailId(userRequest.getEmailId());
 		user.setPassword(userRequest.getPassword());
 		user.setRole(userRequest.getRole());
