@@ -137,4 +137,35 @@ class ToDoServiceTest {
 		assertEquals(new Date(6789999), todo.getDueDate());
 		assertEquals(Priority.MEDIUM, todo.getPriority());
 	}
+	
+	@Test
+	void testUpdateToDoPriorityLevelById() {
+		Long todoId = 1L;
+		UpdateToDoRequest updateRequest = new UpdateToDoRequest();
+		updateRequest.setPriority(Priority.HIGH);
+		
+		
+		Todo todo = new Todo();
+		todo.setTask("OldTask");
+		todo.setDueDate(new Date(6789999));
+		todo.setPriority(Priority.MEDIUM);
+		
+		when(todoRepository.findById(todoId)).thenReturn(Optional.of(todo));
+		when(todoRepository.save(todo)).thenReturn(todo);
+
+		toDoService.updateToDoById(todoId, updateRequest);
+		
+		assertEquals(Priority.HIGH, todo.getPriority());
+		
+		
+		updateRequest.setPriority(Priority.EMERGENCY);
+		toDoService.updateToDoById(todoId, updateRequest);
+		
+		assertEquals(Priority.EMERGENCY, todo.getPriority());
+		
+		updateRequest.setPriority(Priority.LOW);
+		toDoService.updateToDoById(todoId, updateRequest);
+		
+		assertEquals(Priority.LOW, todo.getPriority());
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.taskbuzz.entities.Priority;
 import com.taskbuzz.entities.Todo;
 import com.taskbuzz.entities.User;
 import com.taskbuzz.repository.TodoRepository;
@@ -26,7 +27,6 @@ public class ToDoService {
 	private TodoRepository todoRepository;
     @Autowired
 	private UserService userService;
-
 	
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -75,13 +75,25 @@ public class ToDoService {
 					&& updatetodorequest.getPriority() != null) {
 				todo.setDueDate(updatetodorequest.getDueDate());
 				todo.setTask(updatetodorequest.getTask());
-				todo.setPriority(updatetodorequest.getPriority());
+				
+				//getting Priority from Priority Factory
+				Priority newPriority = new PriorityFactory().getPriorityFromDecorators(todo, updatetodorequest.getPriority().toString());
+				
+				//using a handler to implement command design pattern to set the Priority to a Todo object
+				PriorityCommandHandler priorityCommandHandler = new PriorityCommandHandler(todo);
+				priorityCommandHandler.setPriorityWithCommand(newPriority);
 			} else if (updatetodorequest.getDueDate() != null) {
 				todo.setDueDate(updatetodorequest.getDueDate());
 			} else if (updatetodorequest.getTask() != null) {
 				todo.setTask(updatetodorequest.getTask());
 			} else if (updatetodorequest.getPriority() != null) {
-				todo.setPriority(updatetodorequest.getPriority());
+
+				//getting Priority from Priority Factory
+				Priority newPriority = new PriorityFactory().getPriorityFromDecorators(todo, updatetodorequest.getPriority().toString());
+				
+				//using a handler to implement command design pattern to set the Priority to a Todo object
+				PriorityCommandHandler priorityCommandHandler = new PriorityCommandHandler(todo);
+				priorityCommandHandler.setPriorityWithCommand(newPriority);
 			}
 			todoRepository.save(todo);
 		}

@@ -8,6 +8,7 @@ public class WithLowPriority extends PriorityDecorator{
 		super(priorityLevel);
 	}
 
+	//method Overriding replaces all previously decorated Priorities
 	@Override
 	public Priority getPriority() {
 		return Priority.LOW;

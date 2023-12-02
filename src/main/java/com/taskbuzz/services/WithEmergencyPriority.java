@@ -2,16 +2,15 @@ package com.taskbuzz.services;
 
 import com.taskbuzz.entities.Priority;
 
-public class WithMediumPriority extends PriorityDecorator{
+public class WithEmergencyPriority extends PriorityDecorator {
 
-	public WithMediumPriority(PriorityImpl priorityLevel) {
+	public WithEmergencyPriority(PriorityImpl priorityLevel) {
 		super(priorityLevel);
 	}
 
 	//method Overriding replaces all previously decorated Priorities
 	@Override
 	public Priority getPriority() {
-		return Priority.MEDIUM;
+		return Priority.EMERGENCY;
 	}
-	
 }
