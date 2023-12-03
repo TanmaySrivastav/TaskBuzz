@@ -44,8 +44,8 @@ public class UserServiceTest {
 	public void testGetUsers() {
 
 		List<User> expectedUsers = Arrays.asList(
-				new User(1L, "John", "john@example.com", "password123", new ArrayList<>(), Role.USER),
-				new User(2L, "Elena", "elena@example.com", "password456", new ArrayList<>(), Role.ADMIN));
+				new User(1L, "John", "john@example.com", "password123", new ArrayList<>(), Role.USER,"8976543217"),
+				new User(2L, "Elena", "elena@example.com", "password456", new ArrayList<>(), Role.ADMIN,"8976543217"));
 		when(userRepository.findAll()).thenReturn(expectedUsers);
 
 		List<User> actualUsers = userService.getUsers();
@@ -57,8 +57,8 @@ public class UserServiceTest {
     @Test
     public void testCreateUser() {
 
-        User userToSave = new User(1L, "John", "john@example.com", "password123", new ArrayList<>(), Role.USER);
-        User savedUser = new User(1L, "John", "john@example.com", "encodedPassword", new ArrayList<>(), Role.USER);
+        User userToSave = new User(1L, "John", "john@example.com", "password123", new ArrayList<>(), Role.USER, "8976543217");
+        User savedUser = new User(1L, "John", "john@example.com", "encodedPassword", new ArrayList<>(), Role.USER, "8976543217");
         when(passwordEncoder.encode(any())).thenReturn("encodedPassword");
         when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
@@ -71,7 +71,7 @@ public class UserServiceTest {
     public void testGetUserById() {
 
         Long userId = 1L;
-        User expectedUser = new User(1L, "John", "john@example.com", "password123", new ArrayList<>(), Role.USER);
+        User expectedUser = new User(1L, "John", "john@example.com", "password123", new ArrayList<>(), Role.USER,"8976543217");
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(expectedUser));
 

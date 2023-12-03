@@ -8,15 +8,17 @@ public class AddUserRequest {
 	private String password;
 	private String emailId;
 	private Role role;
+	private String phoneNumber;
 
 	public AddUserRequest() {
 	}
 
-	public AddUserRequest(String username, String password, String emailid, Role role) {
+	public AddUserRequest(String username, String password, String emailid, Role role,String phoneNumber) {
 		this.username = username;
 		this.password = password;
 		this.emailId = emailid;
 		this.role = role;
+		this.phoneNumber=phoneNumber;
 	}
 
 	public String getUsername() {
@@ -49,5 +51,13 @@ public class AddUserRequest {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 }

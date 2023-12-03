@@ -49,6 +49,7 @@ public class ToDoService {
 		todo.setPriority(todoRequest.getPriority());
 		String category = new CategoryFactory().getCategoryType(todoRequest.getCategory());
 		todo.setCategory(category);
+		todo.setSubscribed(todoRequest.isSubscribed());
 		user.getTodoList().add(todo);
 		
 		return userRepository.save(user);

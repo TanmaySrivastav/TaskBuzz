@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.taskbuzz.security.JwtAuthenticationEntryPoint;
 import com.taskbuzz.security.JwtAuthenticationFilter;
-import com.taskbuzz.security.LoggingJwtAuthenticationFilterDecorator;
+import com.taskbuzz.security.LoggingJwtAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
@@ -35,8 +35,8 @@ public class SecurityConfig {
 //	    }
 
 	    @Bean
-	    public LoggingJwtAuthenticationFilterDecorator loggingJwtAuthenticationFilterDecorator(JwtAuthenticationFilter jwtAuthenticationFilter) {
-	        return new LoggingJwtAuthenticationFilterDecorator(jwtAuthenticationFilter);
+	    public LoggingJwtAuthenticationFilter loggingJwtAuthenticationFilterDecorator(JwtAuthenticationFilter jwtAuthenticationFilter) {
+	        return new LoggingJwtAuthenticationFilter(jwtAuthenticationFilter);
 	    }
 	    
 	    @Bean
