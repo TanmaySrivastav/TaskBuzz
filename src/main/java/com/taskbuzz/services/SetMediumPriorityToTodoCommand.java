@@ -3,7 +3,7 @@ package com.taskbuzz.services;
 import com.taskbuzz.entities.Priority;
 import com.taskbuzz.entities.Todo;
 
-public class SetMediumPriorityToTodoCommand implements Command{
+public class SetMediumPriorityToTodoCommand implements PriorityCommand{
 
 	private Todo todo;
 	
