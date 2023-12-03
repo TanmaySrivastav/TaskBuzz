@@ -21,12 +21,13 @@ public class Todo extends PriorityImpl{
 	private String task;
 	private Boolean completed = Boolean.FALSE;
 	private Date dueDate;
+	private boolean subscribed;
 
 	@Enumerated(EnumType.STRING)
 	private Priority priority;
 	private String category;
 
-	public Todo(Long toDoId, String task, Boolean completed, Date dueDate, Priority priority, String category){
+	public Todo(Long toDoId, String task, Boolean completed, Date dueDate, Priority priority, String category,boolean subscribed){
 		super();
 		todoId = toDoId;
 		this.task = task;
@@ -34,6 +35,7 @@ public class Todo extends PriorityImpl{
 		this.dueDate = dueDate;
 		this.priority = priority;
 		this.category = category;
+		this.subscribed = subscribed;
 	}
 
 	public Todo() {
@@ -87,5 +89,12 @@ public class Todo extends PriorityImpl{
 		this.category = category;
 	}
 	
+	public boolean isSubscribed() {
+		return subscribed;
+	}
+
+	public void setSubscribed(boolean subscribed) {
+		this.subscribed = subscribed;
+	}
 
 }

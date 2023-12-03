@@ -51,7 +51,7 @@ class ToDoServiceTest {
 	void testGetToDoById() {
 
 		Long todoId = 1L;
-		Todo expectedTodo = new Todo(1L, "Task 1", false, new Date(6789999), Priority.LOW, "Work");
+		Todo expectedTodo = new Todo(1L, "Task 1", false, new Date(6789999), Priority.LOW, "Work",true);
 
 		when(todoRepository.findById(todoId)).thenReturn(Optional.of(expectedTodo));
 
@@ -73,10 +73,10 @@ class ToDoServiceTest {
 	void testAddToDoList() {
 
 		Long userId = 1L;
-		AddToDoRequest todoRequest = new AddToDoRequest("Task", new Date(6789999), Priority.HIGH, "Category");
+		AddToDoRequest todoRequest = new AddToDoRequest("Task", new Date(6789999), Priority.HIGH, "Category",true);
 
-		User user = new User(1L, "John", "john@example.com", "password123", new ArrayList<>(), Role.USER);
-		Todo todo = new Todo(1L, "Task 1", false, new Date(6789999), Priority.LOW, "Work");
+		User user = new User(1L, "John", "john@example.com", "password123", new ArrayList<>(), Role.USER,"8976543217");
+		Todo todo = new Todo(1L, "Task 1", false, new Date(6789999), Priority.LOW, "Work",true);
 		when(userService.getUserById(userId)).thenReturn(user);
 		when(todoRepository.save(any())).thenReturn(todo);
 		when(userRepository.save(any())).thenReturn(user);

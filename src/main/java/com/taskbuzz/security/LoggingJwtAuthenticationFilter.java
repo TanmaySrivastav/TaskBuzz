@@ -10,11 +10,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class LoggingJwtAuthenticationFilterDecorator extends JwtAuthenticationFilter {
+public class LoggingJwtAuthenticationFilter extends JwtAuthenticationFilter {
     private final JwtAuthenticationFilter decoratedFilter;
-    private Logger logger = LoggerFactory.getLogger(LoggingJwtAuthenticationFilterDecorator.class);
+    private Logger logger = LoggerFactory.getLogger(LoggingJwtAuthenticationFilter.class);
 
-    public LoggingJwtAuthenticationFilterDecorator(JwtAuthenticationFilter decoratedFilter) {
+    public LoggingJwtAuthenticationFilter(JwtAuthenticationFilter decoratedFilter) {
         this.decoratedFilter = decoratedFilter;
     }
 

@@ -43,6 +43,7 @@ public class User implements UserDetails{
 	private String emailId;
 	@Column(name = "password")
 	private String password;
+	private String phoneNumber;
 
 	@Enumerated(EnumType.STRING)
 	private Role role;
@@ -50,7 +51,7 @@ public class User implements UserDetails{
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Todo> todoList = new ArrayList<>();
 
-	public User(Long userId, String username, String emailId, String password, List<Todo> todoList, Role role) {
+	public User(Long userId, String username, String emailId, String password, List<Todo> todoList, Role role,String phoneNumber) {
 		super();
 		this.userId = userId;
 		this.name = username;
@@ -58,6 +59,7 @@ public class User implements UserDetails{
 		this.password = password;
 		this.todoList = todoList;
 		this.role = role;
+		this.phoneNumber = phoneNumber;
 	}
 
 	public Role getRole() {
@@ -99,7 +101,14 @@ public class User implements UserDetails{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+    
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
 
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 	public List<Todo> getTodoList() {
 		return todoList;
 	}

@@ -10,13 +10,15 @@ public class AddToDoRequest {
 	private Date dueDate;
 	private Priority priority;
 	private String category;
+	private boolean subscribed;
 
 
-	public AddToDoRequest(String Task, Date dueDate, Priority priority, String category) {
+	public AddToDoRequest(String Task, Date dueDate, Priority priority, String category,boolean subscribed) {
 		this.task = Task;
 		this.dueDate = dueDate;
 		this.priority = priority;
 		this.category = category;
+		this.subscribed=subscribed;
 	}
 	public String getCategory() {
 		return category;
@@ -52,6 +54,14 @@ public class AddToDoRequest {
 
 	public void setTask(String task) {
 		this.task = task;
+	}
+	
+	public boolean isSubscribed() {
+		return subscribed;
+	}
+
+	public void setSubscribed(boolean subscribed) {
+		this.subscribed = subscribed;
 	}
 
 }
