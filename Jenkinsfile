@@ -5,11 +5,7 @@ node {
     stage('clean') {
         bat 'mvn clean'
     }
-    stage('deploy') {
-        bat 'mvn clean install'
-    }
-
-    stage('test') {
+        stage('test') {
         bat 'mvn test'
     }
 }
