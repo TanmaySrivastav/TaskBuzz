@@ -80,7 +80,7 @@ public class ToDoService {
 				//getting Priority from Priority Factory
 				Priority newPriority = new PriorityFactory().getPriorityFromDecorators(todo, updatetodorequest.getPriority().toString());
 				
-				//using a handler to implement command design pattern to set the Priority to a Todo object
+				//setting Priority with Command
 				PriorityCommandHandler priorityCommandHandler = new PriorityCommandHandler(todo);
 				priorityCommandHandler.setPriorityWithCommand(newPriority);
 			} else if (updatetodorequest.getDueDate() != null) {
@@ -92,7 +92,7 @@ public class ToDoService {
 				//getting Priority from Priority Factory
 				Priority newPriority = new PriorityFactory().getPriorityFromDecorators(todo, updatetodorequest.getPriority().toString());
 				
-				//using a handler to implement command design pattern to set the Priority to a Todo object
+				//setting Priority with Command
 				PriorityCommandHandler priorityCommandHandler = new PriorityCommandHandler(todo);
 				priorityCommandHandler.setPriorityWithCommand(newPriority);
 			}

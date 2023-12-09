@@ -13,7 +13,7 @@ public class PriorityCommandHandler {
 
     public PriorityCommandHandler(Todo todo) {
         // Initialize the map with command instances
-        priorityCommandMap = new HashMap<>();
+        priorityCommandMap = new HashMap<Priority, PriorityCommand>();
         priorityCommandMap.put(Priority.HIGH, new SetHighPriorityToTodoCommand(todo));
         priorityCommandMap.put(Priority.MEDIUM, new SetMediumPriorityToTodoCommand(todo));
         priorityCommandMap.put(Priority.LOW, new SetLowPriorityToTodoCommand(todo));
