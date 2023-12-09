@@ -29,10 +29,14 @@ public class ToDoController {
 
     @Autowired
 	private ToDoService todoservice;
+    
+    @Autowired
+	private UpdateToDoRequest updateToDoRequest;
 
-	public ToDoController(UserService userservice, ToDoService todoservice) {
+	public ToDoController(UserService userservice, ToDoService todoservice, UpdateToDoRequest updateToDoRequest) {
 		super();
 		this.todoservice = todoservice;
+		this.updateToDoRequest=updateToDoRequest;
 	}
 
 	@GetMapping("/{todoId}")
@@ -63,7 +67,7 @@ public class ToDoController {
 	
 	@PutMapping("/update-todo/{todoId}")
     public void updateTodoFromCommandLine(@PathVariable Long todoId) {
-        Command updateCommand = new UpdateTodoCommand(todoId, todoservice);
+        Command updateCommand = new UpdateTodoCommand(todoId, todoservice, updateToDoRequest);
         updateCommand.execute();
     }
 }
